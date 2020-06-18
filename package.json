@@ -1,0 +1,7 @@
+{
+  "name": "calculator-kata",
+  "version": "1.0.0",
+  "repository": "https://github.com/dschinkel/calculator-kata.git",
+  "author": "Dave Schinkel <dschinkel@gmail.com>",
+  "license": "MIT"
+}
