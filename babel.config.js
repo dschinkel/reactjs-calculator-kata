@@ -1,13 +1,12 @@
 module.exports = {
   presets: [
     [
-      '@babel/preset-env',
+      '@ava/stage-4',
       {
         targets: {
           node: 'current'
         }
       },
-    ],
-    '@babel/preset-typescript'
+    ]
   ]
 };

@@ -6,9 +6,14 @@
   "author": "Dave Schinkel <dschinkel@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "nyc --reporter=lcov ava --watch"
+    "test": "nyc -r @babel/register --reporter=lcov ava --watch"
   },
   "devDependencies": {
+    "@ava/babel": "^1.0.1",
+    "@ava/babel-preset-stage-4": "^4.0.0",
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
+    "@babel/register": "^7.10.1",
     "ava": "^3.9.0",
     "nyc": "^15.1.0"
   }

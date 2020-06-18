@@ -1,4 +1,6 @@
 
 export default {
-	files: ['test/**/*']
+	files: ['test/**/*'],
+	require: '@babel/register',
+	babel: true
 };
