@@ -1,7 +1,11 @@
 {
   "name": "calculator-kata",
   "version": "1.0.0",
+  "main": "index.js",
   "repository": "https://github.com/dschinkel/calculator-kata.git",
   "author": "Dave Schinkel <dschinkel@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "ava": "^3.9.0"
+  }
 }
