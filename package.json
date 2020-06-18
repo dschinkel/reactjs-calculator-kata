@@ -5,7 +5,11 @@
   "repository": "https://github.com/dschinkel/calculator-kata.git",
   "author": "Dave Schinkel <dschinkel@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "nyc --reporter=lcov ava --watch"
+  },
   "devDependencies": {
-    "ava": "^3.9.0"
+    "ava": "^3.9.0",
+    "nyc": "^15.1.0"
   }
 }
