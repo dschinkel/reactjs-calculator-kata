@@ -52,4 +52,3 @@ test('disallows non-numeric values', t => {
 
   t.is(calculator.total(), "Input must be a number");
 });
-
