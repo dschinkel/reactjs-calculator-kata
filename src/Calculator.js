@@ -1,9 +1,8 @@
-const evaluate = () => {
-	return 0;
+const evaluate = (input) => {
+	return eval(input ? input : 0);
 }
 
 const Calculator = {
 	evaluate
 }
-
 export default Calculator
