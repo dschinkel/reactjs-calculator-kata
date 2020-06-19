@@ -2,6 +2,8 @@ const evaluate = () => {
 	return 0;
 }
 
-export {
+const Calculator = {
 	evaluate
 }
+
+export default Calculator
