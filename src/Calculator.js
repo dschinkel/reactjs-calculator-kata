@@ -1,11 +1,19 @@
 
 function _Calculator(){
+	let runningTotal = 0;
+
 	function evaluate(input){
-		return eval(input ? input : 0);
+		runningTotal = eval(`${runningTotal}+${input ? input : 0}`);
+		return evaluate;
+	}
+
+	function total(){
+		return runningTotal;
 	}
 
 	return {
-		evaluate
+		evaluate,
+		total
 	}
 }
 
