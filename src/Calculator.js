@@ -1,8 +1,16 @@
-const evaluate = (input) => {
-	return eval(input ? input : 0);
+
+function _Calculator(){
+	function evaluate(input){
+		return eval(input ? input : 0);
+	}
+
+	return {
+		evaluate
+	}
 }
 
-const Calculator = {
-	evaluate
+function Calculator(){
+	return _Calculator();
 }
+
 export default Calculator
