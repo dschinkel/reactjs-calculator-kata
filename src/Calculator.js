@@ -2,6 +2,7 @@
 
 function _Calculator(){
 	let runningTotal = 0;
+	let error;
 
 	function evaluate(input){
 		if(!input || invalidInput(input)) {
@@ -10,20 +11,20 @@ function _Calculator(){
 		runningTotal = eval(`${runningTotal}+${input ? input : 0}`);
 	}
 
-	function total(){
-		return runningTotal;
+	function getResult(){
+		return error || runningTotal;
 	}
 
 	function invalidInput(input){
 		if(foundNegativeNumber(input)) {
-			runningTotal = "Negative numbers are not allowed";
+			error = "Negative numbers are not allowed";
 			return true;
 		}
 
 		let foundInvalidNumber = foundInvalidNumbers(input);
 
 		if(foundInvalidNumber){
-			runningTotal = "Input must be a number";
+			error = "Input must be a number";
 			return true;
 		}
 
@@ -51,7 +52,7 @@ function _Calculator(){
 
 	return {
 		evaluate,
-		total,
+		total: getResult,
 		clear
 	}
 }
