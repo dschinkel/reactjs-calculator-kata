@@ -1,0 +1,48 @@
+function _Validator(){
+	function validateInput(input) {
+		if(!input) return;
+		let errorMessage;
+
+		errorMessage = negativeNumber(input) || notANumber(input);
+		return errorMessage;
+	}
+
+	function negativeNumber(input) {
+		if (foundNegativeNumber(input)) {
+			return "Negative numbers are not allowed";
+		}
+	}
+
+	function notANumber(input){
+		let foundInvalidNumber = foundInvalidNumbers(input);
+
+		if(foundInvalidNumber){
+			return "Input must be a number";
+		}
+	}
+
+	function foundNegativeNumber(input) {
+		return input.indexOf('-') >= 0;
+	}
+
+	function foundInvalidNumbers(input) {
+		let foundInvalidNumber = false;
+		input.split('').forEach(i => {
+			if (i !== '+' && isNaN(i)) {
+				foundInvalidNumber = true;
+			}
+		});
+		return foundInvalidNumber;
+	}
+
+	return {
+		validateInput
+	}
+}
+
+
+function Validator(){
+	return _Validator();
+}
+
+export default Validator;
