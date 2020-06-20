@@ -6,7 +6,7 @@
   "author": "Dave Schinkel <dschinkel@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "test": "nyc -r @babel/register --reporter=lcov ava --watch"
+    "test": "nyc -r @babel/register --reporter=lcov ava --timeout=3000 --watch"
   },
   "dependencies": {
     "react": "^16.13.1",

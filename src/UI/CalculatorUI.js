@@ -1,11 +1,12 @@
 import React from 'react';
 import Calculator from "../Core/Calculator";
 
-const CalculatorUI = () => {
+const calculator = new Calculator();
 
+const CalculatorUI = () => {
 	return (
 		<>
-			<div data-testid='display'>0</div>
+			<div data-testid='display'>{result()}</div>
 			<div>
 				<div data-testid='ac'>AC</div>
 				<div data-testid='negate'>+/-</div>
@@ -24,6 +25,26 @@ const CalculatorUI = () => {
 			</div>
 		</>
 	);
+}
+
+let input = '';
+let result = () => {
+	calculator.evaluate(input);
+	const result = calculator.getResult()
+	calculator.clear();
+	return result;
+};
+
+export const inputNumber = (number) => {
+	input = `${input}${number}`;
+}
+
+export const plus = () => {
+	input = `${input}+`;
+}
+
+export const equals = () => {
+	result();
 
 }
 
@@ -32,7 +53,7 @@ export const NumberKeys = () => {
 		<>
 			{
 				[0,1,2,3,4,5,6,7,8,9].map(number => {
-					return <div data-testid='numberKey'>{number}</div>
+					return <div key={number} data-testid='numberKey' onClick={inputNumber}>{number}</div>
 				})
 			}
 	</>

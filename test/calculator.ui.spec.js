@@ -1,17 +1,12 @@
 import React from "react";
 import Adapter from 'enzyme-adapter-react-16';
-import CalculatorUI, {NumberKeys} from "../src/UI/CalculatorUI";
+import CalculatorUI, {equals, inputNumber, NumberKeys, plus} from "../src/UI/CalculatorUI";
 
 const Enzyme = require('enzyme');
 Enzyme.configure({ adapter: new Adapter() });
 
 const test = require('ava');
 const {shallow} = require("enzyme");
-
-test('display defaults to zero', t => {
-	const display = shallow(<CalculatorUI />).find('[data-testid="display"]');
-	t.is(display.text(), '0');
-});
 
 test('displays a keypad', t => {
 	const keypad = shallow(<CalculatorUI />).find('[data-testid="keypad"]');
@@ -45,8 +40,20 @@ test('display non-numeric keys', t => {
   t.is(equalKey.length,1);
 });
 
-/*test('evaluate returns default', t => {
-  CalculatorUI.
-  t.is(,);
-});*/
+test('evaluate returns default value', t => {
+	const display = shallow(<CalculatorUI />).find('[data-testid="display"]');
+	t.is(display.text(), '0');
+});
+
+
+
+test('handles an addition operation', t => {
+  inputNumber('1');
+	plus();
+	inputNumber('2');
+	equals();
+	const display = shallow(<CalculatorUI />).find('[data-testid="display"]');
+
+	t.is(display.text(), '3');
+});
 
