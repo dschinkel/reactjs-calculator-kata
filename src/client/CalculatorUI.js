@@ -44,7 +44,8 @@ export const plus = () => {
 
 export const equals = () => {
 	calculator.evaluate(input);
-	result = calculator.getResult()
+	result = calculator.getResult();
+	input = result;
 	return result;
 }
 

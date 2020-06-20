@@ -50,7 +50,7 @@ test('equals returns default value', t => {
 	t.is(display.text(), '0');
 });
 
-test('handles an addition operation', t => {
+test.only('handles an addition operation', t => {
   inputNumber('1');
 	plus();
 	inputNumber('2');
@@ -59,4 +59,3 @@ test('handles an addition operation', t => {
 
 	t.is(display.text(), '3');
 });
-

@@ -22,12 +22,12 @@ function _Validator(){
 	}
 
 	function foundNegativeNumber(input) {
-		return input.indexOf('-') >= 0;
+		return input.toString().indexOf('-') >= 0;
 	}
 
 	function foundInvalidNumbers(input) {
 		let foundInvalidNumber = false;
-		input.split('').forEach(i => {
+		input.toString().split('').forEach(i => {
 			if (i !== '+' && isNaN(i)) {
 				foundInvalidNumber = true;
 			}
