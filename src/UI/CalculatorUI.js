@@ -2,11 +2,10 @@ import React from 'react';
 import Calculator from "../Core/Calculator";
 
 const CalculatorUI = () => {
-	const calculator = new Calculator();
-	calculator.evaluate();
+
 	return (
 		<>
-			<div data-testid='display'>{calculator.getResult()}</div>
+			<div data-testid='display'>0</div>
 			<div>
 				<div data-testid='ac'>AC</div>
 				<div data-testid='negate'>+/-</div>

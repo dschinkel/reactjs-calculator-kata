@@ -45,3 +45,8 @@ test('display non-numeric keys', t => {
   t.is(equalKey.length,1);
 });
 
+/*test('evaluate returns default', t => {
+  CalculatorUI.
+  t.is(,);
+});*/
+
