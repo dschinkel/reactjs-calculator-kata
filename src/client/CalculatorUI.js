@@ -3,6 +3,7 @@ import Calculator from "../Core/Calculator";
 
 const calculator = new Calculator();
 let input = '';
+let result;
 
 const CalculatorUI = () => {
 	return (
@@ -12,7 +13,7 @@ const CalculatorUI = () => {
 					<img alt="logo" src="/equal-experts-logo.png" />
 				</a>
 			</div>
-			<div data-testid='display'>{equals()}</div>
+			<div data-testid='display'>{result || equals()}</div>
 			<div>
 				<div data-testid='ac'>AC</div>
 				<div data-testid='negate'>+/-</div>
@@ -43,8 +44,7 @@ export const plus = () => {
 
 export const equals = () => {
 	calculator.evaluate(input);
-	const result = calculator.getResult()
-	calculator.clear();
+	result = calculator.getResult()
 	return result;
 }
 

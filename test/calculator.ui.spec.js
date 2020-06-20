@@ -45,7 +45,7 @@ test('display non-numeric keys', t => {
   t.is(equalKey.length,1);
 });
 
-test('evaluate returns default value', t => {
+test('equals returns default value', t => {
 	const display = shallow(<CalculatorUI />).find('[data-testid="display"]');
 	t.is(display.text(), '0');
 });
