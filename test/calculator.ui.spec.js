@@ -45,8 +45,6 @@ test('evaluate returns default value', t => {
 	t.is(display.text(), '0');
 });
 
-
-
 test('handles an addition operation', t => {
   inputNumber('1');
 	plus();

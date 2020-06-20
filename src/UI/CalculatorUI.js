@@ -6,7 +6,7 @@ const calculator = new Calculator();
 const CalculatorUI = () => {
 	return (
 		<>
-			<div data-testid='display'>{result()}</div>
+			<div data-testid='display'>{equals()}</div>
 			<div>
 				<div data-testid='ac'>AC</div>
 				<div data-testid='negate'>+/-</div>
@@ -21,19 +21,13 @@ const CalculatorUI = () => {
 				<div data-testid='multiply'>x</div>
 				<div data-testid='subtract'>-</div>
 				<div data-testid='add'>+</div>
-				<div data-testid='equal'>=</div>
+				<div data-testid='equal' onClick={equals()}>=</div>
 			</div>
 		</>
 	);
 }
 
 let input = '';
-let result = () => {
-	calculator.evaluate(input);
-	const result = calculator.getResult()
-	calculator.clear();
-	return result;
-};
 
 export const inputNumber = (number) => {
 	input = `${input}${number}`;
@@ -44,8 +38,10 @@ export const plus = () => {
 }
 
 export const equals = () => {
-	result();
-
+	calculator.evaluate(input);
+	const result = calculator.getResult()
+	calculator.clear();
+	return result;
 }
 
 export const NumberKeys = () => {
@@ -53,7 +49,12 @@ export const NumberKeys = () => {
 		<>
 			{
 				[0,1,2,3,4,5,6,7,8,9].map(number => {
-					return <div key={number} data-testid='numberKey' onClick={inputNumber}>{number}</div>
+					return <div
+						key={number}
+						data-testid='numberKey'
+						onClick={() =>
+							inputNumber(number)}>{number}
+					</div>
 				})
 			}
 	</>
