@@ -1,7 +1,6 @@
-import Calculator from "../src/Calculator";
+import Calculator from "../src/Core/Calculator";
 
 const test = require('ava');
-
 
 const calculator = new Calculator();
 test('default evaluates to zero', t => {
