@@ -8,10 +8,22 @@ const CalculatorUI = () => {
 		<>
 			<div data-testid='display'>{calculator.getResult()}</div>
 			<div>
+				<div data-testid='ac'>AC</div>
+				<div data-testid='negate'>+/-</div>
+				<div data-testid='percent'>%</div>
+				<div data-testid='divide'>➗</div>
+			</div>
+			<div>
 				<NumberKeys data-testid="keypad"/>
+				<div data-testid='decimal'>,</div>
+			</div>
+			<div>
+				<div data-testid='multiply'>x</div>
+				<div data-testid='subtract'>-</div>
+				<div data-testid='add'>+</div>
+				<div data-testid='equal'>=</div>
 			</div>
 		</>
-
 	);
 
 }
