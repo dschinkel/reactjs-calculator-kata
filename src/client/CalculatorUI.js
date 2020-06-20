@@ -2,10 +2,16 @@ import React from 'react';
 import Calculator from "../Core/Calculator";
 
 const calculator = new Calculator();
+let input = '';
 
 const CalculatorUI = () => {
 	return (
 		<>
+			<div data-testid='logo'>
+				<a href="https://www.equalexperts.com" id="5000">
+					<img alt="logo" src="/equal-experts-logo.png" />
+				</a>
+			</div>
 			<div data-testid='display'>{equals()}</div>
 			<div>
 				<div data-testid='ac'>AC</div>
@@ -26,8 +32,6 @@ const CalculatorUI = () => {
 		</>
 	);
 }
-
-let input = '';
 
 export const inputNumber = (number) => {
 	input = `${input}${number}`;
@@ -52,8 +56,7 @@ export const NumberKeys = () => {
 					return <div
 						key={number}
 						data-testid='numberKey'
-						onClick={() =>
-							inputNumber(number)}>{number}
+						onClick={() => inputNumber(number)}>{number}
 					</div>
 				})
 			}

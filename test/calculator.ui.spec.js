@@ -1,12 +1,17 @@
 import React from "react";
 import Adapter from 'enzyme-adapter-react-16';
-import CalculatorUI, {equals, inputNumber, NumberKeys, plus} from "../src/UI/CalculatorUI";
+import CalculatorUI, {equals, inputNumber, NumberKeys, plus} from "../src/client/CalculatorUI";
 
 const Enzyme = require('enzyme');
 Enzyme.configure({ adapter: new Adapter() });
 
 const test = require('ava');
 const {shallow} = require("enzyme");
+
+test('shows equal experts logo', t => {
+	const logo = shallow(<CalculatorUI />).find('[data-testid="logo"]');
+	t.is(logo.length, 1);
+});
 
 test('displays a keypad', t => {
 	const keypad = shallow(<CalculatorUI />).find('[data-testid="keypad"]');

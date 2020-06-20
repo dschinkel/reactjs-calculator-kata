@@ -1,7 +1,7 @@
 # calculator-kata
  Thin slice of a Calculator done via Inside-out TDD (UI done in ReactJS)
  
- Thin Slice: Add Function
+ **Thin Slice**: Add Function
  
  ### Notes
  #### In this kata:
