@@ -4,7 +4,7 @@
  Thin Slice: Add Function
  
  ### Notes
- ####In this kata:
+ #### In this kata:
  - chose to use JS Closures as the modules instead of Classes (just for fun)
  - used basic functional React components
  - went with an inside-out TDD approach vs. an outside-in approach
