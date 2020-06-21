@@ -7,7 +7,11 @@ Enzyme.configure({ adapter: new Adapter() });
 
 const test = require('ava');
 const {shallow} = require("enzyme");
-const calculator = shallow(<CalculatorUI />);
+let calculator;
+
+test.beforeEach(t => {
+	calculator = shallow(<CalculatorUI />);
+});
 
 test('shows equal experts logo', t => {
 	const logo = calculator.find('[data-testid="logo"]');
