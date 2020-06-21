@@ -1,19 +1,65 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Calculator from "../Core/Calculator";
 
-const calculator = new Calculator();
-let input = '';
-let result;
 
-const CalculatorUI = () => {
-	return (
-		<>
+class CalculatorUI extends Component {
+	constructor(){
+		super();
+		const calc = new Calculator();
+		calc.evaluate()
+		const defaultResult = calc.getResult();
+
+		this.calculator = calc
+		this.state = {
+			input: '',
+			result: defaultResult
+		}
+	}
+
+	inputNumber = async (number) => {
+		const existingTotal = parseInt(this.state.result > 0);
+		if(existingTotal){
+			await this.appendAdd(number);
+			return;
+		}
+
+		this.setState({
+			input: `${this.state.input}${number}`
+		});
+	}
+
+	plus = () => {
+		if(this.state.input === '') return;
+
+		this.setState({
+			input: `${this.state.input}+`
+		})
+	}
+
+	appendAdd = async (number) => {
+		this.setState({
+			input: number
+		})
+		await this.equate();
+	}
+
+	equate = async () => {
+		this.calculator.evaluate(this.state.input);
+		const result = this.calculator.getResult();
+		await this.setState({
+			result: result,
+			input: ''
+		})
+	}
+
+	render() {
+		return <>
 			<div data-testid='logo'>
 				<a href="https://www.equalexperts.com" id="5000">
-					<img alt="logo" src="/equal-experts-logo.png" />
+					<img alt="logo" src="/equal-experts-logo.png"/>
 				</a>
 			</div>
-			<div data-testid='display'>{result || equals()}</div>
+			<div data-testid='display'>{this.state.result}</div>
 			<div>
 				<div data-testid='ac'>AC</div>
 				<div data-testid='negate'>+/-</div>
@@ -21,35 +67,20 @@ const CalculatorUI = () => {
 				<div data-testid='divide'>➗</div>
 			</div>
 			<div>
-				<NumberKeys data-testid="keypad"/>
+				<NumberKeys inputNumber={this.inputNumber} data-testid="keypad"/>
 				<div data-testid='decimal'>,</div>
 			</div>
 			<div>
 				<div data-testid='multiply'>x</div>
 				<div data-testid='subtract'>-</div>
 				<div data-testid='add'>+</div>
-				<div data-testid='equal' onClick={equals()}>=</div>
+				<div data-testid='equal' onClick={this.equate}>=</div>
 			</div>
 		</>
-	);
+	}
 }
 
-export const inputNumber = (number) => {
-	input = `${input}${number}`;
-}
-
-export const plus = () => {
-	input = `${input}+`;
-}
-
-export const equals = () => {
-	calculator.evaluate(input);
-	result = calculator.getResult();
-	input = result;
-	return result;
-}
-
-export const NumberKeys = () => {
+export function NumberKeys(inputNumber) {
 	return (
 		<>
 			{
@@ -61,8 +92,8 @@ export const NumberKeys = () => {
 					</div>
 				})
 			}
-	</>
-)
+		</>
+	)
 }
 
 export default CalculatorUI;

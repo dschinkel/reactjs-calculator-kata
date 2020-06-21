@@ -1,6 +1,6 @@
 import React from "react";
 import Adapter from 'enzyme-adapter-react-16';
-import CalculatorUI, {equals, inputNumber, NumberKeys, plus} from "../src/client/CalculatorUI";
+import CalculatorUI, {NumberKeys} from "../src/client/CalculatorUI";
 
 const Enzyme = require('enzyme');
 Enzyme.configure({ adapter: new Adapter() });
@@ -23,6 +23,43 @@ test('displays numbers', t => {
   t.is(numberKeys.length, 10);
 });
 
+test('equals returns default value', t => {
+	const display = shallow(<CalculatorUI />).find('[data-testid="display"]');
+	t.is(display.text(), '0');
+});
+
+test('handles an addition operation', async(t) => {
+	const calculator = shallow(<CalculatorUI />);
+	await calculator.instance().inputNumber('1');
+	await calculator.instance().plus();
+	await calculator.instance().inputNumber('2');
+	await calculator.instance().equate();
+
+	const display = calculator.find('[data-testid="display"]');
+
+	t.is(display.text(), '3');
+});
+
+test('handles multiple operations', async(t) => {
+	const calculator = shallow(<CalculatorUI />);
+
+	await calculator.instance().inputNumber('1');
+	calculator.instance().plus();
+	await calculator.instance().inputNumber('2');
+	await calculator.instance().equate();
+	calculator.instance().plus();
+	await calculator.instance().inputNumber('1');
+	calculator.instance().plus();
+	await calculator.instance().inputNumber('2');
+	calculator.instance().plus();
+	await calculator.instance().inputNumber('3');
+	await calculator.instance().equate();
+
+	const display = calculator.find('[data-testid="display"]');
+
+	t.is(display.text(), '9');
+});
+
 test('display non-numeric keys', t => {
 	const decimalKey = shallow(<CalculatorUI />).find('[data-testid="decimal"]');
 	const acKey = shallow(<CalculatorUI />).find('[data-testid="ac"]');
@@ -34,28 +71,13 @@ test('display non-numeric keys', t => {
 	const addKey = shallow(<CalculatorUI />).find('[data-testid="add"]');
 	const equalKey = shallow(<CalculatorUI />).find('[data-testid="equal"]');
 
-  t.is(decimalKey.length,1);
-  t.is(acKey.length,1);
-  t.is(negateKey.length,1);
-  t.is(percentKey.length,1);
-  t.is(divideKey.length,1);
-  t.is(multiplyKey.length,1);
-  t.is(subtractKey.length,1);
-  t.is(addKey.length,1);
-  t.is(equalKey.length,1);
-});
-
-test('equals returns default value', t => {
-	const display = shallow(<CalculatorUI />).find('[data-testid="display"]');
-	t.is(display.text(), '0');
-});
-
-test.only('handles an addition operation', t => {
-  inputNumber('1');
-	plus();
-	inputNumber('2');
-	equals();
-	const display = shallow(<CalculatorUI />).find('[data-testid="display"]');
-
-	t.is(display.text(), '3');
+	t.is(decimalKey.length,1);
+	t.is(acKey.length,1);
+	t.is(negateKey.length,1);
+	t.is(percentKey.length,1);
+	t.is(divideKey.length,1);
+	t.is(multiplyKey.length,1);
+	t.is(subtractKey.length,1);
+	t.is(addKey.length,1);
+	t.is(equalKey.length,1);
 });
