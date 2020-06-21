@@ -7,14 +7,15 @@ Enzyme.configure({ adapter: new Adapter() });
 
 const test = require('ava');
 const {shallow} = require("enzyme");
+const calculator = shallow(<CalculatorUI />);
 
 test('shows equal experts logo', t => {
-	const logo = shallow(<CalculatorUI />).find('[data-testid="logo"]');
+	const logo = calculator.find('[data-testid="logo"]');
 	t.is(logo.length, 1);
 });
 
 test('displays a keypad', t => {
-	const keypad = shallow(<CalculatorUI />).find('[data-testid="keypad"]');
+	const keypad = calculator.find('[data-testid="keypad"]');
   t.is(keypad.length, 1);
 });
 
@@ -24,7 +25,7 @@ test('displays numbers', t => {
 });
 
 test('equals returns default value', t => {
-	const display = shallow(<CalculatorUI />).find('[data-testid="display"]');
+	const display = calculator.find('[data-testid="display"]');
 	t.is(display.text(), '0');
 });
 
@@ -62,8 +63,6 @@ test('handles multiple operations', t => {
 });
 
 test('display non-numeric keys', t => {
-	const calculator = shallow(<CalculatorUI />);
-
 	const decimalKey = calculator.find('[data-testid="decimal"]');
 	const acKey = calculator.find('[data-testid="ac"]');
 	const negateKey = calculator.find('[data-testid="negate"]');
