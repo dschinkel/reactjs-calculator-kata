@@ -28,33 +28,34 @@ test('equals returns default value', t => {
 	t.is(display.text(), '0');
 });
 
-test('handles an addition operation', async(t) => {
+test('handles an addition operation', t => {
 	const calculator = shallow(<CalculatorUI />);
-	await calculator.instance().inputNumber('1');
-	await calculator.instance().plus();
-	await calculator.instance().inputNumber('2');
-	await calculator.instance().equate();
+	const { equate, inputNumber, plus } = calculator.instance();
 
+	inputNumber('1');
+	plus();
+	inputNumber('2');
+	equate();
 	const display = calculator.find('[data-testid="display"]');
 
 	t.is(display.text(), '3');
 });
 
-test('handles multiple operations', async(t) => {
+test('handles multiple operations', t => {
 	const calculator = shallow(<CalculatorUI />);
+	const { equate, inputNumber, plus } = calculator.instance();
 
-	await calculator.instance().inputNumber('1');
-	calculator.instance().plus();
-	await calculator.instance().inputNumber('2');
-	await calculator.instance().equate();
-	calculator.instance().plus();
-	await calculator.instance().inputNumber('1');
-	calculator.instance().plus();
-	await calculator.instance().inputNumber('2');
-	calculator.instance().plus();
-	await calculator.instance().inputNumber('3');
-	await calculator.instance().equate();
-
+	inputNumber('1');
+	plus();
+	inputNumber('2');
+	equate();
+	plus();
+	inputNumber('1');
+	plus();
+	inputNumber('2');
+	plus();
+	inputNumber('3');
+	equate();
 	const display = calculator.find('[data-testid="display"]');
 
 	t.is(display.text(), '9');

@@ -5,10 +5,11 @@ import Calculator from "../Core/Calculator";
 class CalculatorUI extends Component {
 	constructor(){
 		super();
-		const calc = new Calculator();
-		calc.evaluate()
-		const defaultResult = calc.getResult();
+		this.initializeState();
+	}
 
+	initializeState() {
+		const {calc, defaultResult} = this.initializeCalculator();
 		this.calculator = calc
 		this.state = {
 			input: '',
@@ -16,10 +17,17 @@ class CalculatorUI extends Component {
 		}
 	}
 
-	inputNumber = async (number) => {
+	initializeCalculator() {
+		const calc = new Calculator();
+		calc.evaluate()
+		const defaultResult = calc.getResult();
+		return {calc, defaultResult};
+	}
+
+	inputNumber = (number) => {
 		const existingTotal = parseInt(this.state.result > 0);
 		if(existingTotal){
-			await this.appendAdd(number);
+			this.appendAdd(number);
 			return;
 		}
 
@@ -29,24 +37,26 @@ class CalculatorUI extends Component {
 	}
 
 	plus = () => {
-		if(this.state.input === '') return;
+		const notStartOfANewOperation = this.state.input === '';
+		if(notStartOfANewOperation) return;
 
 		this.setState({
 			input: `${this.state.input}+`
 		})
 	}
 
-	appendAdd = async (number) => {
+	appendAdd = (number) => {
 		this.setState({
 			input: number
 		})
-		await this.equate();
+		this.equate();
 	}
 
-	equate = async () => {
+	equate = () => {
 		this.calculator.evaluate(this.state.input);
 		const result = this.calculator.getResult();
-		await this.setState({
+
+		this.setState({
 			result: result,
 			input: ''
 		})
