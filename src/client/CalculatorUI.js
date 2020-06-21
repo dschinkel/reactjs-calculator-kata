@@ -20,8 +20,6 @@ class CalculatorUI extends Component {
 			input: '',
 			result: defaultResult
 		}
-
-		this.inputNumber = this.inputNumber.bind(this);
 	}
 
 	inputNumber = (number) => {
