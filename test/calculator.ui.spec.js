@@ -62,15 +62,17 @@ test('handles multiple operations', t => {
 });
 
 test('display non-numeric keys', t => {
-	const decimalKey = shallow(<CalculatorUI />).find('[data-testid="decimal"]');
-	const acKey = shallow(<CalculatorUI />).find('[data-testid="ac"]');
-	const negateKey = shallow(<CalculatorUI />).find('[data-testid="negate"]');
-	const percentKey = shallow(<CalculatorUI />).find('[data-testid="percent"]');
-	const divideKey = shallow(<CalculatorUI />).find('[data-testid="divide"]');
-	const multiplyKey = shallow(<CalculatorUI />).find('[data-testid="multiply"]');
-	const subtractKey = shallow(<CalculatorUI />).find('[data-testid="subtract"]');
-	const addKey = shallow(<CalculatorUI />).find('[data-testid="add"]');
-	const equalKey = shallow(<CalculatorUI />).find('[data-testid="equal"]');
+	const calculator = shallow(<CalculatorUI />);
+
+	const decimalKey = calculator.find('[data-testid="decimal"]');
+	const acKey = calculator.find('[data-testid="ac"]');
+	const negateKey = calculator.find('[data-testid="negate"]');
+	const percentKey = calculator.find('[data-testid="percent"]');
+	const divideKey = calculator.find('[data-testid="divide"]');
+	const multiplyKey = calculator.find('[data-testid="multiply"]');
+	const subtractKey = calculator.find('[data-testid="subtract"]');
+	const addKey = calculator.find('[data-testid="add"]');
+	const equalKey = calculator.find('[data-testid="equal"]');
 
 	t.is(decimalKey.length,1);
 	t.is(acKey.length,1);
