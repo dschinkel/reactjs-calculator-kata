@@ -5,23 +5,21 @@ import Calculator from "../domain/Calculator";
 class CalculatorUI extends Component {
 	constructor(){
 		super();
-		this.initializeState();
-	}
 
-	initializeState() {
-		const {calc, defaultResult} = this.initializeCalculator();
+		function initializeCalculator() {
+			const calc = new Calculator();
+			calc.evaluate()
+			const defaultResult = calc.getResult();
+			return {calc, defaultResult};
+		}
+
+		const {calc, defaultResult} = initializeCalculator();
+
 		this.calculator = calc
 		this.state = {
 			input: '',
 			result: defaultResult
 		}
-	}
-
-	initializeCalculator() {
-		const calc = new Calculator();
-		calc.evaluate()
-		const defaultResult = calc.getResult();
-		return {calc, defaultResult};
 	}
 
 	inputNumber = (number) => {
