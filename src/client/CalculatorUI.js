@@ -20,6 +20,8 @@ class CalculatorUI extends Component {
 			input: '',
 			result: defaultResult
 		}
+
+		this.inputNumber = this.inputNumber.bind(this);
 	}
 
 	inputNumber = (number) => {
@@ -64,7 +66,7 @@ class CalculatorUI extends Component {
 		return <>
 			<div data-testid='logo'>
 				<a href="https://www.equalexperts.com" id="5000">
-					<img alt="logo" src="/equal-experts-logo.png"/>
+					<img alt="logo" src="/src/equal-experts-logo.png"/>
 				</a>
 			</div>
 			<div data-testid='display'>{this.state.result}</div>
@@ -81,14 +83,14 @@ class CalculatorUI extends Component {
 			<div>
 				<div data-testid='multiply'>x</div>
 				<div data-testid='subtract'>-</div>
-				<div data-testid='add'>+</div>
+				<div data-testid='add' 	onClick={this.plus}>+</div>
 				<div data-testid='equal' onClick={this.equate}>=</div>
 			</div>
 		</>
 	}
 }
 
-export function NumberKeys(inputNumber) {
+export function NumberKeys(props) {
 	return (
 		<>
 			{
@@ -96,7 +98,7 @@ export function NumberKeys(inputNumber) {
 					return <div
 						key={number}
 						data-testid='numberKey'
-						onClick={() => inputNumber(number)}>{number}
+						onClick={() => props.inputNumber(number)}>{number}
 					</div>
 				})
 			}
