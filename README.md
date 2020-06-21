@@ -2,7 +2,9 @@
  Thin slice of a Calculator done via Inside-Out TDD.
  - UI done in ReactJS
  
- **Thin Slice**: Add Function
+ **Thin Slice**: `Add` button on the calculator
+ 
+ To run the calculator: `yarn start`
  
  ### Notes
  #### In this kata:

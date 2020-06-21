@@ -5,7 +5,7 @@ function _Calculator(){
 	let error;
 
 	function evaluate(input){
-		const validator = new Validator();
+		const validator = Validator();
 		error = validator.validateInput(input);
 
 		if(error || !input) {

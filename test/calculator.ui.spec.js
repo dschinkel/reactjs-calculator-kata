@@ -66,7 +66,7 @@ test('handles multiple operations', t => {
 	t.is(display.text(), '9');
 });
 
-test('display non-numeric keys', t => {
+test('displays non-numeric keys', t => {
 	const decimalKey = calculator.find('[data-testid="decimal"]');
 	const acKey = calculator.find('[data-testid="ac"]');
 	const negateKey = calculator.find('[data-testid="negate"]');
