@@ -6,9 +6,10 @@
  
  ### Notes
  #### In this kata:
- - chose to use JS Closures (functional modules) instead of Classes
- - used basic functional React components
+ - chose to use JS Factories (classic JS Modules/Closure) instead of JS Classes for the functional logic (`src\domain`)
  - went with an inside-out TDD approach vs. an outside-in approach
     - either way is fine, just figured we'd try inside-out this time
-- Did not incorporate typescript due to time, but TS is great, we can always add that
-- tried out the Ava test framework (instead of something like Jest, Mocha, or Tape)
+- tried out the ava test framework this time instead of Jest, Mocha, etc.
+
+### Tests
+Run: `yarn test`

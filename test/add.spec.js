@@ -1,4 +1,4 @@
-import Calculator from "../src/Core/Calculator";
+import Calculator from "../src/domain/Calculator";
 
 const test = require('ava');
 

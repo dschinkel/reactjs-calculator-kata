@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Calculator from "../Core/Calculator";
+import Calculator from "../domain/Calculator";
 
 
 class CalculatorUI extends Component {
