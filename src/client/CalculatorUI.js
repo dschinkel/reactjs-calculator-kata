@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Calculator from '../domain/Calculator';
-// import Logo from './equal-experts-logo.png'
+import Logo from './equal-experts-logo.png'
 
 class CalculatorUI extends Component {
 	constructor(){
