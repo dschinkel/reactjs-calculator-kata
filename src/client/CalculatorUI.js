@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Calculator from "../domain/Calculator";
-
+import Calculator from '../domain/Calculator';
+// import Logo from './equal-experts-logo.png'
 
 class CalculatorUI extends Component {
 	constructor(){
@@ -8,7 +8,7 @@ class CalculatorUI extends Component {
 
 		function initializeCalculator() {
 			const calc = new Calculator();
-			calc.evaluate()
+			calc.evaluate();
 			const defaultResult = calc.getResult();
 			return {calc, defaultResult};
 		}
@@ -22,6 +22,15 @@ class CalculatorUI extends Component {
 		}
 	}
 
+	clear = () => {
+		console.log("test")
+		this.calculator.clear();
+		this.calculator.evaluate()
+		this.setState({
+			result: this.calculator.getResult()
+		});
+	}
+
 	inputNumber = (number) => {
 		const existingTotal = parseInt(this.state.result > 0);
 		if(existingTotal){
@@ -30,7 +39,8 @@ class CalculatorUI extends Component {
 		}
 
 		this.setState({
-			input: `${this.state.input}${number}`
+			input: `${this.state.input}${number}`,
+			result: number
 		});
 	}
 
@@ -62,44 +72,94 @@ class CalculatorUI extends Component {
 
 	render() {
 		return <>
-			<div data-testid='logo'>
-				<a href="https://www.equalexperts.com" id="5000">
-					<img alt="logo" src="/src/equal-experts-logo.png"/>
-				</a>
-			</div>
-			<div data-testid='display'>{this.state.result}</div>
-			<div>
-				<div data-testid='ac'>AC</div>
-				<div data-testid='negate'>+/-</div>
-				<div data-testid='percent'>%</div>
-				<div data-testid='divide'>➗</div>
-			</div>
-			<div>
-				<NumberKeys inputNumber={this.inputNumber} data-testid="keypad"/>
-				<div data-testid='decimal'>,</div>
-			</div>
-			<div>
-				<div data-testid='multiply'>x</div>
-				<div data-testid='subtract'>-</div>
-				<div data-testid='add' 	onClick={this.plus}>+</div>
-				<div data-testid='equal' onClick={this.equate}>=</div>
+			<div className="Calculator-container">
+				<Display data-testid='display' result={this.state.result} />
+				<Keys
+					data-testid="keypad"
+					inputNumber={this.inputNumber}
+					plus={this.plus}
+					equate={this.equate}
+					clear={this.clear}
+				 />
 			</div>
 		</>
 	}
 }
 
-export function NumberKeys(props) {
+export function Display(props){
+	return <div className="Calculator-row">
+		<div data-testid='logo'>
+			<a href="https://www.equalexperts.com" id="5000">
+				<img src='./equal-experts-logo.png' alt="equal experts logo" />
+			</a>
+		</div>
+		<div className="result">{props.result}</div>
+	</div>
+}
+
+export function Keys(props) {
 	return (
 		<>
-			{
-				[0,1,2,3,4,5,6,7,8,9].map(number => {
-					return <div
-						key={number}
-						data-testid='numberKey'
-						onClick={() => props.inputNumber(number)}>{number}
-					</div>
-				})
-			}
+			<div className="Calculator-row">
+				<div className="key-row1" data-testid='ac' onClick={props.clear}>AC</div>
+				<div className="key-row1" data-testid='negate'>+/-</div>
+				<div className="key-row1" data-testid='percent'>%</div>
+				<div className="key-column" data-testid='divide'>&#247;</div>
+			</div>
+			<div className="Calculator-row">
+				{
+					[7,8,9].map(number => {
+						return <div
+							className="key"
+							key={number}
+							data-testid='numberKey'
+							onClick={() => props.inputNumber(number)}>{number}
+						</div>
+					})
+				}
+				<div className="key-column" data-testid='multiply'>x</div>
+			</div>
+			<div className="Calculator-row">
+				{
+					[4,5,6].map(number => {
+						return <div
+							className="key"
+							key={number}
+							data-testid='numberKey'
+							onClick={() => props.inputNumber(number)}>{number}
+						</div>
+					})
+				}
+				<div className="key-column" data-testid='subtract'>-</div>
+			</div>
+			<div className="Calculator-row">
+				{
+					[1,2,3].map(number => {
+						return <div
+							className="key"
+							key={number}
+							data-testid='numberKey'
+							onClick={() => props.inputNumber(number)}>{number}
+						</div>
+					})
+				}
+				<div className="key-column" data-testid='add' onClick={props.plus}>+</div>
+			</div>
+
+			<div className="Calculator-row">
+				{
+					[0].map(number => {
+						return <div
+							className="zero-key"
+							key={number}
+							data-testid='numberKey'
+							onClick={() => props.inputNumber(number)}>{number}
+						</div>
+					})
+				}
+				<div className="key" data-testid='decimal'>.</div>
+				<div className="key-column" data-testid='equal' onClick={props.equate}>=</div>
+			</div>
 		</>
 	)
 }

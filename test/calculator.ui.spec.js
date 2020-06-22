@@ -1,6 +1,6 @@
 import React from "react";
 import Adapter from 'enzyme-adapter-react-16';
-import CalculatorUI, {NumberKeys} from "../src/client/CalculatorUI";
+import CalculatorUI, {Display, Keys} from "../src/client/CalculatorUI";
 
 const Enzyme = require('enzyme');
 Enzyme.configure({ adapter: new Adapter() });
@@ -14,7 +14,8 @@ test.beforeEach(t => {
 });
 
 test('shows equal experts logo', t => {
-	const logo = calculator.find('[data-testid="logo"]');
+	const display = shallow(<Display />);
+	const logo = display.find('[data-testid="logo"]');
 	t.is(logo.length, 1);
 });
 
@@ -24,13 +25,13 @@ test('displays a keypad', t => {
 });
 
 test('displays numbers', t => {
-  const numberKeys = shallow(<NumberKeys />).find('[data-testid="numberKey"]');
+  const numberKeys = shallow(<Keys />).find('[data-testid="numberKey"]');
   t.is(numberKeys.length, 10);
 });
 
 test('equals returns default value', t => {
 	const display = calculator.find('[data-testid="display"]');
-	t.is(display.text(), '0');
+	t.is(display.props().result, 0);
 });
 
 test('handles an addition operation', t => {
@@ -43,7 +44,7 @@ test('handles an addition operation', t => {
 	equate();
 	const display = calculator.find('[data-testid="display"]');
 
-	t.is(display.text(), '3');
+	t.is(display.props().result, 3);
 });
 
 test('handles multiple operations', t => {
@@ -63,19 +64,34 @@ test('handles multiple operations', t => {
 	equate();
 	const display = calculator.find('[data-testid="display"]');
 
-	t.is(display.text(), '9');
+	t.is(display.props().result, 9);
+});
+
+test('clear calculator', t => {
+	const calculator = shallow(<CalculatorUI />);
+	const { clear, inputNumber } = calculator.instance();
+	let display;
+
+	inputNumber('3');
+	display = calculator.find('[data-testid="display"]');
+	t.is(display.props().result, '3');
+
+	clear();
+	display = calculator.find('[data-testid="display"]');
+  t.is(display.props().result,0);
 });
 
 test('displays non-numeric keys', t => {
-	const decimalKey = calculator.find('[data-testid="decimal"]');
-	const acKey = calculator.find('[data-testid="ac"]');
-	const negateKey = calculator.find('[data-testid="negate"]');
-	const percentKey = calculator.find('[data-testid="percent"]');
-	const divideKey = calculator.find('[data-testid="divide"]');
-	const multiplyKey = calculator.find('[data-testid="multiply"]');
-	const subtractKey = calculator.find('[data-testid="subtract"]');
-	const addKey = calculator.find('[data-testid="add"]');
-	const equalKey = calculator.find('[data-testid="equal"]');
+	const keys = shallow(<Keys />);
+	const decimalKey = keys.find('[data-testid="decimal"]');
+	const acKey = keys.find('[data-testid="ac"]');
+	const negateKey = keys.find('[data-testid="negate"]');
+	const percentKey = keys.find('[data-testid="percent"]');
+	const divideKey = keys.find('[data-testid="divide"]');
+	const multiplyKey = keys.find('[data-testid="multiply"]');
+	const subtractKey = keys.find('[data-testid="subtract"]');
+	const addKey = keys.find('[data-testid="add"]');
+	const equalKey = keys.find('[data-testid="equal"]');
 
 	t.is(decimalKey.length,1);
 	t.is(acKey.length,1);

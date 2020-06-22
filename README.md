@@ -12,6 +12,7 @@
  - went with an inside-out TDD approach vs. an outside-in approach
     - either way is fine, just figured we'd try inside-out this time
 - tried out the ava test framework this time instead of Jest, Mocha, etc.
+- does not handle adding decmial numbers yet
 
 ### Tests
 Run: `yarn test`
