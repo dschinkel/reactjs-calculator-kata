@@ -97,6 +97,7 @@ export function Display(props){
 	</div>
 }
 
+
 export function Keys(props) {
 	return (
 		<>
@@ -109,12 +110,7 @@ export function Keys(props) {
 			<div className="Calculator-row">
 				{
 					[7,8,9].map(number => {
-						return <div
-							className="key"
-							key={number}
-							data-testid='numberKey'
-							onClick={() => props.inputNumber(number)}>{number}
-						</div>
+						return NumberKey(number, props)
 					})
 				}
 				<div className="key-column" data-testid='multiply'>x</div>
@@ -122,12 +118,7 @@ export function Keys(props) {
 			<div className="Calculator-row">
 				{
 					[4,5,6].map(number => {
-						return <div
-							className="key"
-							key={number}
-							data-testid='numberKey'
-							onClick={() => props.inputNumber(number)}>{number}
-						</div>
+						return NumberKey(number, props)
 					})
 				}
 				<div className="key-column" data-testid='subtract'>-</div>
@@ -135,33 +126,28 @@ export function Keys(props) {
 			<div className="Calculator-row">
 				{
 					[1,2,3].map(number => {
-						return <div
-							className="key"
-							key={number}
-							data-testid='numberKey'
-							onClick={() => props.inputNumber(number)}>{number}
-						</div>
+						return NumberKey(number, props)
 					})
 				}
 				<div className="key-column" data-testid='add' onClick={props.plus}>+</div>
 			</div>
 
 			<div className="Calculator-row">
-				{
-					[0].map(number => {
-						return <div
-							className="zero-key"
-							key={number}
-							data-testid='numberKey'
-							onClick={() => props.inputNumber(number)}>{number}
-						</div>
-					})
-				}
+				{NumberKey(0, props)}
 				<div className="key" data-testid='decimal'>.</div>
 				<div className="key-column" data-testid='equal' onClick={props.equate}>=</div>
 			</div>
 		</>
 	)
+}
+
+function NumberKey(number, props) {
+	return <div
+		className="zero-key"
+		key={number}
+		data-testid='numberKey'
+		onClick={() => props.inputNumber(number)}>{number}
+	</div>;
 }
 
 export default CalculatorUI;
