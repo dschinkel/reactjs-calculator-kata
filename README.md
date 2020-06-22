@@ -5,6 +5,7 @@
  **Thin Slice**: `Add` button on the calculator
  
  **To run**: `yarn start`
+ 
  **To test**: `yarn test`
  
  ### Notes
