@@ -86,7 +86,7 @@ test('handles multiple operations', t => {
 	plus();
 	inputNumber('2');
 	plus();
-	inputNumber('3');
+	inputNumber('33');
 	equate();
 	display = calculator.find('[data-testid="display"]');
 

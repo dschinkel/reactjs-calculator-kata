@@ -7,6 +7,7 @@
  
  **To run**: 
  - `yarn` - once, to initially install node-modules
+ - `yarn build`
  - `yarn start` - should open a browser and run the calculator
 
  **To test**: `yarn test`
