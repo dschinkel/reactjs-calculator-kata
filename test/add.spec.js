@@ -2,8 +2,9 @@ import Calculator from "../src/domain/Calculator";
 
 const test = require('ava');
 
-const calculator = new Calculator();
+
 test('default evaluates to zero', t => {
+	const calculator = Calculator();
   calculator.evaluate();
   t.is(calculator.getResult(), 0);
 });
