@@ -1,6 +1,6 @@
 import React from "react";
 import Adapter from 'enzyme-adapter-react-16';
-import CalculatorUI, {Display, Keys} from "./src/client/CalculatorUI";
+import CalculatorUI, {Display, Keys} from "../src/client/CalculatorUI";
 
 const Enzyme = require('enzyme');
 Enzyme.configure({ adapter: new Adapter() });
@@ -90,7 +90,7 @@ test('handles multiple operations', t => {
 	equate();
 	display = calculator.find('[data-testid="display"]');
 
-	t.is(display.props().displayResult, 9);
+	t.is(display.props().displayResult, 39);
 });
 
 test('clear calculator', t => {
