@@ -144,7 +144,7 @@ export function Keys(props) {
 }
 
 function Key(displayValue, style, testId, handler) {
-	return handler ? <div className={style} data-testid={testId} onClick={handler || (() => {})()}>{displayValue}</div>
+	return handler ? <div className={style} data-testid={testId} onClick={handler}>{displayValue}</div>
 		: <div className={style} data-testid={testId}>{displayValue}</div>;
 }
 
