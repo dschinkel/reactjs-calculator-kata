@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Calculator from '../domain/Calculator';
 import Logo from './equal-experts-logo.png'
 
+
 class CalculatorUI extends Component {
 	constructor(){
 		super();
@@ -9,71 +10,73 @@ class CalculatorUI extends Component {
 		function initializeCalculator() {
 			const calc = new Calculator();
 			calc.evaluate();
-			const defaultResult = calc.getResult();
-			return {calc, defaultResult};
+			const defaultDisplay = calc.getResult();
+			return {calc, defaultResult: defaultDisplay};
 		}
 
 		const {calc, defaultResult} = initializeCalculator();
 
 		this.calculator = calc
 		this.state = {
-			input: '',
-			result: defaultResult
+			combinedInput: '',
+			displayResult: defaultResult
 		}
 	}
 
 	clear = () => {
-		console.log("test")
 		this.calculator.clear();
 		this.calculator.evaluate()
 		this.setState({
-			result: this.calculator.getResult()
+			combinedInput: '',
+			displayResult: this.calculator.getResult()
 		});
 	}
 
 	inputNumber = (number) => {
-		const existingTotal = parseInt(this.state.result > 0);
-		if(existingTotal){
-			this.appendAdd(number);
-			return;
-		}
+		const currentInput = `${this.state.combinedInput}${number}`;
+		const updatedDisplay = this.updateDisplayAfterInput(currentInput, number);
 
 		this.setState({
-			input: `${this.state.input}${number}`,
-			result: number
+			combinedInput: currentInput,
+			displayResult: updatedDisplay
 		});
 	}
 
 	plus = () => {
-		const notStartOfANewOperation = this.state.input === '';
+		const notStartOfANewOperation = this.state.combinedInput === '';
 		if(notStartOfANewOperation) return;
 
 		this.setState({
-			input: `${this.state.input}+`
+			combinedInput: `${this.state.combinedInput}+`
 		})
-	}
-
-	appendAdd = (number) => {
-		this.setState({
-			input: number
-		})
-		this.equate();
 	}
 
 	equate = () => {
-		this.calculator.evaluate(this.state.input);
+		this.calculator.evaluate(this.state.combinedInput);
 		const result = this.calculator.getResult();
 
 		this.setState({
-			result: result,
-			input: ''
+			combinedInput: '',
+			displayResult: result
 		})
+	}
+
+	updateDisplayAfterInput(currentInput, number) {
+		const updatedDisplay = () => {
+			const appendingNumberToAdd = currentInput.indexOf('+') >= 0;
+			if (appendingNumberToAdd) {
+				return number;
+			}
+			const displayConsecutiveInputOnly = currentInput.replace('+', '');
+			return displayConsecutiveInputOnly
+		}
+		return updatedDisplay();
 	}
 
 	render() {
 		return <>
 			<div className="Calculator-container">
-				<Display data-testid='display' result={this.state.result} />
+				<Display data-testid='display' displayResult={this.state.displayResult} />
 				<Keys
 					data-testid="keypad"
 					inputNumber={this.inputNumber}
@@ -90,60 +93,64 @@ export function Display(props){
 	return <div className="Calculator-row">
 		<div data-testid='logo'>
 			<a href="https://www.equalexperts.com" id="5000">
-				<img src='./equal-experts-logo.png' alt="equal experts logo" />
+				<img src={Logo} alt="equal experts logo" />
 			</a>
 		</div>
-		<div className="result">{props.result}</div>
+		<div className="display">{props.displayResult}</div>
 	</div>
 }
-
 
 export function Keys(props) {
 	return (
 		<>
 			<div className="Calculator-row">
-				<div className="key-row1" data-testid='ac' onClick={props.clear}>AC</div>
-				<div className="key-row1" data-testid='negate'>+/-</div>
-				<div className="key-row1" data-testid='percent'>%</div>
-				<div className="key-column" data-testid='divide'>&#247;</div>
+				{Key('AC', 'key-row1', 'ac', props.clear)}
+				{Key('+/-', 'key-row1', 'negate')}
+				{Key('%', 'key-row1', 'percent')}
+				{Key('÷', 'key-column', 'divide')}
 			</div>
 			<div className="Calculator-row">
 				{
-					[7,8,9].map(number => {
+					[7, 8, 9].map(number => {
 						return NumberKey(number, props)
 					})
 				}
-				<div className="key-column" data-testid='multiply'>x</div>
+				{Key('x', 'key-column', 'multiply')}
 			</div>
 			<div className="Calculator-row">
 				{
-					[4,5,6].map(number => {
+					[4, 5, 6].map(number => {
 						return NumberKey(number, props)
 					})
 				}
-				<div className="key-column" data-testid='subtract'>-</div>
+				{Key('-', 'key-column', 'subtract')}
 			</div>
 			<div className="Calculator-row">
 				{
-					[1,2,3].map(number => {
+					[1, 2, 3].map(number => {
 						return NumberKey(number, props)
 					})
 				}
-				<div className="key-column" data-testid='add' onClick={props.plus}>+</div>
+				{Key('+', 'key-column', 'add', props.plus)}
 			</div>
 
 			<div className="Calculator-row">
 				{NumberKey(0, props)}
-				<div className="key" data-testid='decimal'>.</div>
-				<div className="key-column" data-testid='equal' onClick={props.equate}>=</div>
+				{Key('.', 'key', 'decimal')}
+				{Key('=', 'key-column', 'equal', props.equate)}
 			</div>
 		</>
 	)
 }
 
+function Key(displayValue, style, testId, handler) {
+	return handler ? <div className={style} data-testid={testId} onClick={handler || (() => {})()}>{displayValue}</div>
+		: <div className={style} data-testid={testId}>{displayValue}</div>;
+}
+
 function NumberKey(number, props) {
 	return <div
-		className="zero-key"
+		className={number === 0 ? "zero-key" : "key"}
 		key={number}
 		data-testid='numberKey'
 		onClick={() => props.inputNumber(number)}>{number}

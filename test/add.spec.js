@@ -51,3 +51,11 @@ test('disallows non-numeric values', t => {
 
   t.is(calculator.getResult(), "Input must be a number");
 });
+
+test('disallows an incomplete add operation', t => {
+	const calculator = Calculator();
+
+	calculator.evaluate('1+');
+
+	t.is(calculator.getResult(), "Incomplete operation");
+});

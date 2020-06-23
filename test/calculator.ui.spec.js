@@ -29,58 +29,6 @@ test('displays numbers', t => {
   t.is(numberKeys.length, 10);
 });
 
-test('equals returns default value', t => {
-	const display = calculator.find('[data-testid="display"]');
-	t.is(display.props().result, 0);
-});
-
-test('handles an addition operation', t => {
-	const calculator = shallow(<CalculatorUI />);
-	const { equate, inputNumber, plus } = calculator.instance();
-
-	inputNumber('1');
-	plus();
-	inputNumber('2');
-	equate();
-	const display = calculator.find('[data-testid="display"]');
-
-	t.is(display.props().result, 3);
-});
-
-test('handles multiple operations', t => {
-	const calculator = shallow(<CalculatorUI />);
-	const { equate, inputNumber, plus } = calculator.instance();
-
-	inputNumber('1');
-	plus();
-	inputNumber('2');
-	equate();
-	plus();
-	inputNumber('1');
-	plus();
-	inputNumber('2');
-	plus();
-	inputNumber('3');
-	equate();
-	const display = calculator.find('[data-testid="display"]');
-
-	t.is(display.props().result, 9);
-});
-
-test('clear calculator', t => {
-	const calculator = shallow(<CalculatorUI />);
-	const { clear, inputNumber } = calculator.instance();
-	let display;
-
-	inputNumber('3');
-	display = calculator.find('[data-testid="display"]');
-	t.is(display.props().result, '3');
-
-	clear();
-	display = calculator.find('[data-testid="display"]');
-  t.is(display.props().result,0);
-});
-
 test('displays non-numeric keys', t => {
 	const keys = shallow(<Keys />);
 	const decimalKey = keys.find('[data-testid="decimal"]');
@@ -102,4 +50,59 @@ test('displays non-numeric keys', t => {
 	t.is(subtractKey.length,1);
 	t.is(addKey.length,1);
 	t.is(equalKey.length,1);
+});
+
+test('equals returns default value', t => {
+	const display = calculator.find('[data-testid="display"]');
+	t.is(display.props().displayResult, 0);
+});
+
+test('handles an addition operation', t => {
+	const calculator = shallow(<CalculatorUI />);
+	const { equate, inputNumber, plus } = calculator.instance();
+
+	inputNumber('1');
+	plus();
+	inputNumber('2');
+	equate();
+	const display = calculator.find('[data-testid="display"]');
+
+	t.is(display.props().displayResult, 3);
+});
+
+test('handles multiple operations', t => {
+	const calculator = shallow(<CalculatorUI />);
+	const { equate, inputNumber, plus } = calculator.instance();
+	let display;
+
+	inputNumber('1');
+	plus();
+	inputNumber('2');
+	display = calculator.find('[data-testid="display"]');
+	t.is(display.props().displayResult, '2');
+	equate();
+	plus();
+	inputNumber('1');
+	plus();
+	inputNumber('2');
+	plus();
+	inputNumber('3');
+	equate();
+	display = calculator.find('[data-testid="display"]');
+
+	t.is(display.props().displayResult, 9);
+});
+
+test('clear calculator', t => {
+	const calculator = shallow(<CalculatorUI />);
+	const { clear, inputNumber } = calculator.instance();
+	let display;
+
+	inputNumber('3');
+	display = calculator.find('[data-testid="display"]');
+	t.is(display.props().displayResult, '3');
+
+	clear();
+	display = calculator.find('[data-testid="display"]');
+  t.is(display.props().displayResult,0);
 });

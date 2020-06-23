@@ -15,7 +15,7 @@
 	flex-direction: row;
 }
 
-.result {
+.display {
 	width: 100px;
 	text-align: right;
 	vertical-align: middle;
@@ -23,6 +23,7 @@
 	font-size: 20px;
 	background-color: #484848;
 	padding: 5px 5px 0 0;
+	overflow-wrap: break-word;
 }
 
 

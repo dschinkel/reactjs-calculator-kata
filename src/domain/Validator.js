@@ -1,10 +1,17 @@
+
 function _Validator(){
 	function validateInput(input) {
 		if(!input) return;
 		let errorMessage;
 
-		errorMessage = negativeNumber(input) || notANumber(input);
+		errorMessage = incompleteOperation(input) || negativeNumber(input) || notANumber(input);
 		return errorMessage;
+	}
+
+	function incompleteOperation(input) {
+		if(input.substr(-1) === '+') {
+			return "Incomplete operation"
+		}
 	}
 
 	function negativeNumber(input) {
