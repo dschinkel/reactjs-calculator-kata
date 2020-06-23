@@ -5,7 +5,9 @@
  **Thin Slice**: `Add` Operation
  - note that at this juncture, it does not yet handle decimal addition (todo later)
  
- **To run**: `yarn start`
+ **To run**: 
+ - `yarn` - once, to initially install node-modules
+ - `yarn start` - should open a browser and run the calculator
 
  **To test**: `yarn test`
  
