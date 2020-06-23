@@ -1,6 +1,6 @@
 import React from "react";
 import Adapter from 'enzyme-adapter-react-16';
-import CalculatorUI, {Display, Keys} from "../src/client/CalculatorUI";
+import CalculatorUI, {Display, Keys} from "./src/client/CalculatorUI";
 
 const Enzyme = require('enzyme');
 Enzyme.configure({ adapter: new Adapter() });
