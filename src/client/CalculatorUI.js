@@ -4,8 +4,8 @@ import Logo from './equal-experts-logo.png'
 
 
 class CalculatorUI extends Component {
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 
 		function initializeCalculator() {
 			const calc = new Calculator();
