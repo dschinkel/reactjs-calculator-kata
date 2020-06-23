@@ -11,7 +11,7 @@
 
  **To test**: `yarn test`
  
- ### Notes
+ ### Notes on Approach / Choices
  - I chose to use JS Factories (classic JS Modules/Closure) instead of JS Classes for creating object instances for the functional core (domain) logic in  `src\domain`
  - went with an inside-out TDD approach vs. an outside-in approach
     - either way is fine, just figured we'd try inside-out this time
