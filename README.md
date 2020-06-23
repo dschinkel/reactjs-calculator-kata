@@ -6,6 +6,8 @@
  - note that at this juncture, it does not yet handle decimal addition (todo later)
  
  **To run**: 
+ - first, ensure you're using **node 12 or better**
+    - You can use [nvm](https://github.com/nvm-sh/nvm) to change node versions very easily with the `npm use <nodversion>`
  - `yarn` - once, to initially install node-modules
  - `yarn start` - should open a browser and run the calculator
 
