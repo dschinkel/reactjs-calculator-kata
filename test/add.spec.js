@@ -2,7 +2,6 @@ import Calculator from "../src/domain/Calculator";
 
 const test = require('ava');
 
-
 test('default evaluates to zero', t => {
 	const calculator = Calculator();
   calculator.evaluate();
@@ -10,14 +9,13 @@ test('default evaluates to zero', t => {
 });
 
 test('adds two positive numbers', t => {
-  const calculator = Calculator();
+	const calculator = Calculator();
   calculator.evaluate('0+1');
     t.is(calculator.getResult(), 1);
 });
 
 test('handles multiple operations', t => {
-  const calculator = Calculator();
-
+	const calculator = Calculator();
   calculator.evaluate('0+1');
   calculator.evaluate('0+4');
   calculator.evaluate('10');

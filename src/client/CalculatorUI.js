@@ -8,7 +8,7 @@ class CalculatorUI extends Component {
 		super(props);
 
 		function initializeCalculator() {
-			const calc = new Calculator();
+			const calc = Calculator();
 			calc.evaluate();
 			const defaultDisplay = calc.getResult();
 			return {calc, defaultResult: defaultDisplay};
