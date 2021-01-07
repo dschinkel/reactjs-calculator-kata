@@ -1,4 +1,4 @@
-# calculator-kata
+# reactjs-calculator-kata
  Thin slice of a Calculator done via Inside-Out TDD.
  Uses React Hooks as well as EnzymeJS.
  
