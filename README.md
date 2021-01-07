@@ -1,5 +1,7 @@
 # calculator-kata
  Thin slice of a Calculator done via Inside-Out TDD.
+ Uses React Hooks as well as EnzymeJS.
+ 
  - UI done in ReactJS
  
  **Thin Slice**: `Add` Operation
